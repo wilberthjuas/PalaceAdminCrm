@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 ?>
 <div class="container-fluid">
 
-    
+
 <?php $form = ActiveForm::begin(); ?>
 <div class="panel panel-success">
 <div class="panel-heading">
@@ -29,12 +29,12 @@ use yii\helpers\ArrayHelper;
               <?= $form->field($model, 'autorizador_id')->textInput(['onchange' => 'js:consultaWSAut();','maxlength' => true])->label('ID del Autorizador'); ?>
          </div>
          <div class="col-md-5">
-              <?= $form->field($model, 'autorizador_nombre')->textInput(['maxlength' => true])->label('Nombre del Autorizador');?> 
+              <?= $form->field($model, 'autorizador_nombre')->textInput(['maxlength' => true])->label('Nombre del Autorizador');?>
          </div>
          <div class="col-md-5">
-              <?= $form->field($model, 'autorizador_puesto')->textInput(['maxlength' => true])->label('Puesto del Autoriador') ?>      
+              <?= $form->field($model, 'autorizador_puesto')->textInput(['maxlength' => true])->label('Puesto del Autoriador') ?>
          </div>
-      </div> 
+      </div>
   </div>
 </div>
 
@@ -52,9 +52,9 @@ use yii\helpers\ArrayHelper;
               <?= $form->field($model, 'solicitante_nombre')->textInput(['maxlength' => true])->label('Nombre del Solicitante'); ?>
          </div>
          <div class="col-md-5">
-             <?= $form->field($model, 'solicitante_puesto')->textInput(['maxlength' => true])->label('Puesto del Solicitante'); ?>      
+             <?= $form->field($model, 'solicitante_puesto')->textInput(['maxlength' => true])->label('Puesto del Solicitante'); ?>
          </div>
-      </div>   
+      </div>
    </div>
 </div>
 
@@ -113,30 +113,30 @@ use yii\helpers\ArrayHelper;
                     $.ajax({
                             type: "GET",
                             url:  '<?php echo(Yii::$app->urlManager->createUrl('formatosolicitudes/obtenerempleado')); ?>',
-                            
+
                             data: {
-                                
+
                                     parametros: $('#formatosolicitudes-autorizador_id').val()
                                   },
-                                 
+
                                   
                             success: function(data)
                             {
-                                
+
                                 if(data!=0)
                                 {
                                     var res="";
                                     res=jQuery.parseJSON(data);
                                     $('#formatosolicitudes-autorizador_nombre').val(res.NOMBRE);
                                     $('#formatosolicitudes-autorizador_puesto').val(res.JOBDESCR);
-         
+
                                 }
                             },
-                            error: function(data) 
-                            { 
+                            error: function(data)
+                            {
                                 alert("Error occured.please try again:"+data);
                             }
-                            
+
                     })
 
 
@@ -153,30 +153,30 @@ use yii\helpers\ArrayHelper;
                     $.ajax({
                             type: "GET",
                             url:  '<?php echo(Yii::$app->urlManager->createUrl('formatosolicitudes/obtenerempleado')); ?>',
-                            
+
                             data: {
-                                
+
                                     parametros: $('#formatosolicitudes-solicitante_id').val()
                                   },
-                                 
-                                  
+
+
                             success: function(data)
                             {
-                                
+
                                 if(data!=0)
                                 {
                                     var res="";
                                     res=jQuery.parseJSON(data);
                                     $('#formatosolicitudes-solicitante_nombre').val(res.NOMBRE);
                                     $('#formatosolicitudes-solicitante_puesto').val(res.JOBDESCR);
-         
+
                                 }
                             },
-                            error: function(data) 
-                            { 
+                            error: function(data)
+                            {
                                 alert("Error occured.please try again:"+data);
                             }
-                            
+
                     })
 
 
@@ -194,16 +194,16 @@ use yii\helpers\ArrayHelper;
                     $.ajax({
                             type: "GET",
                             url:  '<?php echo(Yii::$app->urlManager->createUrl('formatosolicitudes/obtenerempleado')); ?>',
-                            
+
                             data: {
-                                
+
                                     parametros: $('#formatosolicitudes-usuario_id').val()
                                   },
-                                 
-                                  
+
+
                             success: function(data)
                             {
-                                
+
                                 if(data!=0)
                                 {
                                     var res="";
@@ -211,14 +211,14 @@ use yii\helpers\ArrayHelper;
                                     $('#formatosolicitudes-nombre').val(res.NOMBRE);
                                     $('#formatosolicitudes-puesto').val(res.JOBDESCR);
                                     $('#formatosolicitudes-departamento').val(res.DESCR);
-         
+
                                 }
                             },
-                            error: function(data) 
-                            { 
+                            error: function(data)
+                            {
                                 alert("Error occured.please try again:"+data);
                             }
-                            
+
                     })
 
 
@@ -227,5 +227,4 @@ use yii\helpers\ArrayHelper;
                     alert('La c�dula ingresada no existe! 2');
                 }
   }
-</script> 
-
+</script>
