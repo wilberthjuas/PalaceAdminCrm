@@ -115,11 +115,8 @@ use yii\helpers\ArrayHelper;
                             url:  '<?php echo(Yii::$app->urlManager->createUrl('formatosolicitudes/obtenerempleado')); ?>',
 
                             data: {
-
                                     parametros: $('#formatosolicitudes-autorizador_id').val()
                                   },
-
-                                  
                             success: function(data)
                             {
 
@@ -142,7 +139,7 @@ use yii\helpers\ArrayHelper;
 
                 }else
                 {
-                    alert('La c�dula ingresada no existe! 2');
+                    alert('La cedula de autorizador ingresada no existe');
                 }
   }
    function consultaWSSol()
@@ -174,7 +171,7 @@ use yii\helpers\ArrayHelper;
                             },
                             error: function(data)
                             {
-                                alert("Error occured.please try again:"+data);
+                                alert("Error occured. please try again:"+data);
                             }
 
                     })
@@ -182,7 +179,7 @@ use yii\helpers\ArrayHelper;
 
                 }else
                 {
-                    alert('La c�dula ingresada no existe! 2');
+                    alert('La cedula del solicitante ingresada no existe!');
                 }
   }
 
@@ -224,7 +221,7 @@ use yii\helpers\ArrayHelper;
 
                 }else
                 {
-                    alert('La c�dula ingresada no existe! 2');
+                    alert('La cedula del usuario ingresada no existe!');
                 }
   }
 </script>
