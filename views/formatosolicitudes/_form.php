@@ -15,94 +15,83 @@ use yii\helpers\ArrayHelper;
 /* @var $model app\models\Formatosolicitudes */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="container-fluid">
 
 
 <?php $form = ActiveForm::begin(); ?>
-<div class="panel panel-success">
-<div class="panel-heading">
-    <h3 class="panel-title">Datos de Autorizador</h3>
-</div>
+<div class="input-sm">
+<div class="panel panel-default col-md-4">
+
+
   <div class="panel-body">
-      <div class="row">
-          <div class="col-md-2">
-              <?= $form->field($model, 'autorizador_id')->textInput(['onchange' => 'js:consultaWSAut();','maxlength' => true])->label('ID del Autorizador'); ?>
-         </div>
-         <div class="col-md-5">
-              <?= $form->field($model, 'autorizador_nombre')->textInput(['maxlength' => true])->label('Nombre del Autorizador');?>
-         </div>
-         <div class="col-md-5">
-              <?= $form->field($model, 'autorizador_puesto')->textInput(['maxlength' => true])->label('Puesto del Autoriador') ?>
-         </div>
-      </div>
+    <h4>Datos de Autorizador</h4>
+  <div class="form-group">
+      <?= $form->field($model, 'autorizador_id')->textInput(['onchange' => 'js:consultaWSAut();','maxlength' => true,'style'=>'width:55%;'])->label('ID del Autorizador',['class'=>'col-sm-5','style'=>'padding-top:2%']); ?>
+  </div>
+  <div class="form-group">
+    <?= $form->field($model, 'autorizador_nombre')->textInput(['maxlength' => true,'style'=>'width:55%;','readonly'=>true])->label('Nombre',['class'=>'col-sm-5','style'=>'padding-top:2%']);?>
+  </div>
+  <div class="form-group">
+    <?= $form->field($model, 'autorizador_puesto')->textInput(['maxlength' => true,'style'=>'width:55%;','readonly'=>true])->label('Puesto del Autorizador',['class'=>'col-sm-5','style'=>'padding-top:%']) ?>
+
+    </div>
   </div>
 </div>
 
 
-<div class="panel panel-success">
-<div class="panel-heading">
-   <h3 class="panel-title">Datos del solicitante</h3>
-</div>
+<div class="panel panel-default col-md-8"  style="float:right;">
+
+  <div class="panel-body">
+
+    <h4>Datos del usuario</h4>
+         <div class="form-group">
+             <?= $form->field($model, 'usuario_id')->textInput(['onchange' => 'js:consultaWSUsu();','maxlength' => true,'style'=>'width:75%;'])->label('ID del Usuario',['class'=>'col-sm-3','style'=>'padding-top:1%']); ?>
+         </div>
+         <div class="form-group">
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true,'style'=>'width:75%;','readonly'=>true])->label('Nombre del Usuario',['class'=>'col-sm-3','style'=>'padding-top:1%']); ?>
+         </div>
+        <div class="form-group">
+            <?= $form->field($model, 'puesto')->textInput(['maxlength' => true,'style'=>'width:75%;','readonly'=>true])->label('Puesto del Usuario',['class'=>'col-sm-3','style'=>'padding-top:1%']); ?>
+        </div>
+         <div class="form-group">
+            <?= $form->field($model, 'departamento')->textInput(['maxlength' => true,'style'=>'width:75%;','readonly'=>true])->label('Departamento',['class'=>'col-sm-3','style'=>'padding-top:1%']); ?>
+         </div>
+         <div class="form-group">
+           <?= $form->field($model, 'correo')->textInput(['maxlength' => true,'style'=>'width:75%;'])->label('Correo',['class'=>'col-sm-3','style'=>'padding-top:1%']); ?>
+         </div>
+         <div class="form-group">
+           <?= $form->field($model, 'comentario')->textInput(['maxlength' => true,'style'=>'width:75%;'])->label('Usuario Referencia',['class'=>'col-sm-3','style'=>'padding-top:1%']); ?>
+         </div>
+         <div class="form-group">
+         <?= $form->field($model, 'comentario')->textarea(array('rows'=>2))->label('Comentarios'); ?>
+       </div>
+
+       <div class="form-group">
+           <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+       </div>
+       </div>
+  </div>
+<div class="panel panel-default col-md-4">
+
+
+
    <div class="panel-body">
-      <div class="row">
-          <div class="col-md-2">
+      <h4>Datos del solicitante</h4>
+          <div class="form-group">
               <?= $form->field($model, 'solicitante_id')->textInput(['onchange' => 'js:consultaWSSol();','maxlength' => true])->label('ID del Solicitante'); ?>
           </div>
-         <div class="col-md-5">
-              <?= $form->field($model, 'solicitante_nombre')->textInput(['maxlength' => true])->label('Nombre del Solicitante'); ?>
+         <div class="form-group">
+              <?= $form->field($model, 'solicitante_nombre')->textInput(['maxlength' => true,'readonly'=>true])->label('Nombre del Solicitante'); ?>
          </div>
-         <div class="col-md-5">
-             <?= $form->field($model, 'solicitante_puesto')->textInput(['maxlength' => true])->label('Puesto del Solicitante'); ?>
+         <div class="form-group">
+             <?= $form->field($model, 'solicitante_puesto')->textInput(['maxlength' => true,'readonly'=>true])->label('Puesto del Solicitante'); ?>
          </div>
-      </div>
+
    </div>
 </div>
 
-
-
-<div class="panel panel-success">
-<div class="panel-heading">
-    <h3 class="panel-title">Datos del usuario</h3>
-</div>
-  <div class="panel-body">
-     <div class="row">
-         <div class="col-md-2">
-             <?= $form->field($model, 'usuario_id')->textInput(['onchange' => 'js:consultaWSUsu();','maxlength' => true])->label('ID del Usuario'); ?>
-         </div>
-         <div class="col-md-5">
-            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])->label('Nombre del Usuario'); ?>
-         </div>
-        <div class="col-md-5">
-            <?= $form->field($model, 'puesto')->textInput(['maxlength' => true])->label('Puesto del Usuario'); ?>
-        </div>
-      </div>
-      <div class="row">
-         <div class="col-md-2">
-            <?= $form->field($model, 'departamento')->textInput(['maxlength' => true])->label('Departamento'); ?>
-         </div>
-         <div class="col-md-5">
-           <?= $form->field($model, 'correo')->textInput(['maxlength' => true])->label('Correo'); ?>
-         </div>
-     </div>
-  </div>
-</div>
-
-
-
-<div class="row">
- <div class="col-md-6 sm-5">
-   <spam><strong>Comentarios</strong></spam>
-   <?= $form->field($model, 'comentario')->textarea(array('rows'=>7,'cols'=>4))->hint('Max 255 characters.')->label(''); ?>
- </div>
-</div>
-
-
-<div class="form-group">
-    <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
 </div>
 
 <?php ActiveForm::end(); ?>
-</div>
 
 <script language="javascript">
   function consultaWSAut()
