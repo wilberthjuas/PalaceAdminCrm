@@ -21,8 +21,8 @@ use \SoapClient;
  * @property string $departamento
  * @property string $correo
  * @property string $comentario
- * @property int $users_id
- *
+ * @property string $tipo
+ * @property string $usuarioRef
  * @property Users $users
  * @property Rolusuarios[] $rolusuarios
  * @property Sistemasap[] $sistemasaps
@@ -71,43 +71,44 @@ class Formatosolicitudes extends \yii\db\ActiveRecord
             'departamento' => 'Departamento',
             'correo' => 'Correo',
             'comentario' => 'Comentario',
-            'users_id' => 'Users ID',
+            'tipo' => 'Tipo',
+            'usuarioRef' => 'Usuario Ref',
         ];
     }
 
     public function getEmpleado($parametros){
         $n_Autorizador =$_GET['parametros'];//obtener Valor del campo 083078
-    
+
         $parametros = array();
         //$parametros[numeroIdentificacion] = "0922464656";
         $parametros['numeroEmpleado'] = $n_Autorizador;
-    
-    
+
+
         try{
-            $client = new SoapClient('http://140.50.34.128/sisturws/index.php?r=externos/Empleados/ServiceInterface',['soap_version'=>SOAP_1_2, 
-            'exceptions'=>true, 
-            'trace'=>1, 
+            $client = new SoapClient('http://140.50.34.128/sisturws/index.php?r=externos/Empleados/ServiceInterface',['soap_version'=>SOAP_1_2,
+            'exceptions'=>true,
+            'trace'=>1,
             'cache_wsdl'=>WSDL_CACHE_NONE]);
-            
+
             //var_dump($client->__getFunctions()); //metedo que trae todas lad funciones
             //die();
              $result = $client->ObtenerEmpleados($parametros);
-    
+
              //var_dump($client->__getTypes());
             //var_dump($result);
             // die();
-           
+
              $data = array();
              $data = $result;
              echo json_encode($data);
-             
+
         }catch(SoapFault $fault){
-                         
-        
+
+
         }
-       
+
     }
-    
+
 
     /**
      * @return \yii\db\ActiveQuery
