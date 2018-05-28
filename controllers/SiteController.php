@@ -56,20 +56,20 @@ public function beforeAction($action)
     if (!parent::beforeAction($action)) {
         return false;
     }
- 
+
     $operacion = str_replace("/", "-", Yii::$app->controller->route);
- 
+
     $permitirSiempre = ['site-captcha', 'site-register','site-signup', 'site-index', 'site-error', 'site-contact', 'site-login', 'site-logout'];
- 
+
     if (in_array($operacion, $permitirSiempre)) {
         return true;
     }
- 
+
     if (!AccessHelpers::getAcceso($operacion)) {
         echo $this->render('viewnopermitido');
         return false;
     }
- 
+
     return true;
 }
     /**
@@ -100,17 +100,17 @@ public function beforeAction($action)
         }
         return $key;
     }
-  
+
  public function actionConfirm()
  {
     $table = new Users;
     if (Yii::$app->request->get())
     {
-   
+
         //Obtenemos el valor de los parámetros get
         $id = Html::encode($_GET["id"]);
         $authKey = $_GET["authKey"];
-    
+
         if ((int) $id)
         {
             //Realizamos la consulta para obtener el registro
@@ -118,7 +118,7 @@ public function beforeAction($action)
             ->find()
             ->where("id=:id", [":id" => $id])
             ->andWhere("authKey=:authKey", [":authKey" => $authKey]);
- 
+
             //Si el registro existe
             if ($model->count() == 1)
             {
@@ -146,22 +146,22 @@ public function beforeAction($action)
         }
     }
  }
- 
+
  public function actionRegister()
  {
   //Creamos la instancia con el model de validación
   $model = new FormRegister;
-   
+
   //Mostrará un mensaje en la vista cuando el usuario se haya registrado
   $msg = null;
-   
+
   //Validación mediante ajax
   if ($model->load(Yii::$app->request->post()) && Yii::$app->request->isAjax)
         {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-   
+
   //Validación cuando el formulario es enviado vía post
   //Esto sucede cuando la validación ajax se ha llevado a cabo correctamente
   //También previene por si el usuario tiene desactivado javascript y la
@@ -182,7 +182,7 @@ public function beforeAction($action)
     //Creamos un token de acceso único para el usuario
     $table->accessToken = $this->randKey("abcdef0123456789", 200);
     $table->rol_id = $model->rol_id;
-     
+
     //Si el registro es guardado correctamente
     if ($table->insert())
     {
@@ -191,11 +191,11 @@ public function beforeAction($action)
      $user = $table->find()->where(["email" => $model->email])->one();
      $id = urlencode($user->id);
      $authKey = urlencode($user->authKey);
-      
+
      $subject = "Confirmar registro";
      $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
      $body .= "<a href='http://yii.local/index.php?r=site/confirm&id=".$id."&authKey=".$authKey."'>Confirmar</a>";
-      
+
      //Enviamos el correo
      Yii::$app->mailer->compose()
      ->setTo($user->email)
@@ -203,19 +203,19 @@ public function beforeAction($action)
      ->setSubject($subject)
      ->setHtmlBody($body)
      ->send();
-     
+
      $model->username = null;
      $model->email = null;
      $model->password = null;
      $model->password_repeat = null;
-     
+
      $msg = "Enhorabuena, ahora sólo falta que confirmes tu registro en tu cuenta de correo";
     }
     else
     {
      $msg = "Ha ocurrido un error al llevar a cabo tu registro";
     }
-     
+
    }
    else
    {
@@ -232,7 +232,7 @@ public function beforeAction($action)
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return Yii::$app->response->redirect(Url::to('/formatosolicitudes/create'));
     }
 
     /**
@@ -300,16 +300,16 @@ public function beforeAction($action)
 
     public function actionEmpleado(){
        // $n_Autorizador =$_GET['parametros'];//obtener Valor del campo 083078
-    
+
         //$parametros = array();
         //$parametros[numeroIdentificacion] = "0922464656";
         //$parametros['numeroEmpleado'] = $n_Autorizador;
 
 
         try{
-            $client = new SoapClient('http://140.50.34.128/sisturws/index.php?r=autenticacion/Autenticacion/ServiceInterface',['soap_version'=>SOAP_1_2, 
-            'exceptions'=>true, 
-            'trace'=>1, 
+            $client = new SoapClient('http://140.50.34.128/sisturws/index.php?r=autenticacion/Autenticacion/ServiceInterface',['soap_version'=>SOAP_1_2,
+            'exceptions'=>true,
+            'trace'=>1,
             'cache_wsdl'=>WSDL_CACHE_NONE]);
             $parametros='paban@palacereosrts.com';
            // var_dump($client->__getFunctions()); //metedo que trae todas lad funciones
@@ -319,16 +319,16 @@ public function beforeAction($action)
              //var_dump($client->__getTypes());
             var_dump($result);
              die();
-           
+
              $data = array();
              $data = $result;
              echo json_encode($data);
-             
+
         }catch(SoapFault $fault){
-                         
-        
+
+
         }
-       
+
     }
 
 }

@@ -1,8 +1,6 @@
 <?php
-
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -46,20 +44,18 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
         'ad' => [
             'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
-    
             /*
              * Set the default provider to one of the providers defined in the
              * providers array.
@@ -72,7 +68,6 @@ $config = [
              *
              */
              // 'defaultProvider' => 'another_provider',
-    
             /*
              * Adlapd2 can handle multiple providers to different Active Directory sources.
              * Each provider has it's own config.
@@ -91,37 +86,30 @@ $config = [
                 'default' => [ //Providername default
                     // Connect this provider on initialisation of the LdapWrapper Class automatically
                     'autoconnect' => false,
-    
                     // The provider's schema. Default is \Adldap\Schemas\ActiveDirectory set in https://github.com/Adldap2/Adldap2/blob/master/src/Connections/Provider.php#L112
                     // You can make your own https://github.com/Adldap2/Adldap2/blob/master/docs/schema.md or use one from https://github.com/Adldap2/Adldap2/tree/master/src/Schemas
                     // Example to set it to OpenLDAP:
                     // 'schema' => new \Adldap\Schemas\OpenLDAP(),
-    
                     // The config has to be defined as described in the Adldap2 documentation.
                     // https://github.com/Adldap2/Adldap2/blob/master/docs/configuration.md
                     'config' => [
                     // Your account suffix, for example: matthias.maderer@example.lan
                     'account_suffix'        => '.palace-resorts.local',
-    
                     // You can use the host name or the IP address of your controllers.
                     'domain_controllers'    => ['prestamocds23.palace-resorts.local'],
-    
                     // Your base DN. This is usually your account suffix.
                     'base_dn'               => 'dc=palace-resorts,dc=local',
-    
                     // The account to use for querying / modifying users. This
                     // does not need to be an actual admin account.
                     'admin_username'        => 'username_ldap_access',
                     'admin_password'        => 'password_ldap_access!',
-    
                                     // To enable SSL/TLS read the docs/SSL_TLS_AD.md and uncomment
                                     // the variables below
                                     'port' => 636,
                                     'use_ssl' => true,
-                                    'use_tls' => true,                                
+                                    'use_tls' => true,
                     ]
                 ],
-    
                 /*
                  * Another Provider
                  * You don't have to define another provider if you don't need it. It's just an example.
@@ -132,43 +120,35 @@ $config = [
                 'another_provider' => [ //Providername another_provider
                     // Connect this provider on initialisation of the LdapWrapper Class automatically
                     'autoconnect' => false,
-    
                     // The provider's schema. Default is \Adldap\Schemas\ActiveDirectory set in https://github.com/Adldap2/Adldap2/blob/master/src/Connections/Provider.php#L112
                     // You can make your own https://github.com/Adldap2/Adldap2/blob/master/docs/schema.md or use one from https://github.com/Adldap2/Adldap2/tree/master/src/Schemas
                     // Example to set it to OpenLDAP:
                     // 'schema' => new \Adldap\Schemas\OpenLDAP(),
-    
                     // The config has to be defined as described in the Adldap2 documentation.
-                    // https://github.com/Adldap2/Adldap2/blob/master/docs/configuration.md               
+                    // https://github.com/Adldap2/Adldap2/blob/master/docs/configuration.md
                     'config' => [
                     // Your account suffix, for example: matthias.maderer@test.lan
                     'account_suffix'        => '@test.lan',
-    
                     // You can use the host name or the IP address of your controllers.
                     'domain_controllers'    => ['server1.test.lan', 'server2'],
-    
                     // Your base DN. This is usually your account suffix.
                     'base_dn'               => 'dc=test,dc=lan',
-    
                     // The account to use for querying / modifying users. This
                     // does not need to be an actual admin account.
                     'admin_username'        => 'username_ldap_access',
                     'admin_password'        => 'password_ldap_access',
-    
                                     // To enable SSL/TLS read the docs/SSL_TLS_AD.md and uncomment
                                     // the variables below
                                     //'port' => 636,
                                     //'use_ssl' => true,
-                                    //'use_tls' => true, 
+                                    //'use_tls' => true,
                     ] // close config
                 ], // close provider
             ], // close providers array
         ], //close ad
-    
     ],
     'params' => $params,
 ];
-
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
@@ -177,7 +157,6 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
-
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
@@ -185,5 +164,4 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
-
 return $config;
