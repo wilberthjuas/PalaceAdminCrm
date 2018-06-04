@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\FormatosolicitudesSearch */
+	/* @var $model app\models\search\FormatosolicitudesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -41,7 +41,14 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'comentario') ?>
 
-    <?php // echo $form->field($model, 'users_id') ?>
+    <?php // echo $form->field($model, 'tipo') ?>
+
+    <?php // echo $form->field($model, 'usuarioRef') ?>
+
+    <?php // echo $form->field($model, 'fecha_solicitud') ?>
+
+        <?php // echo $form->field($model, 'hora_solcitud') ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -39,6 +39,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Auditoría',
+           'items' => [
+                ['label' => 'Solicitudes de Registro'],
+                ['label' => 'Solicitudes de Roles'],
+           ]],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -50,8 +55,7 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
-        ],
+            )]
     ]);
     NavBar::end();
     ?>

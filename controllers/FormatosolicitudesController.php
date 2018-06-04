@@ -4,10 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Formatosolicitudes;
+use app\models\Roles;
 use app\models\Comentarios;
-use app\models\Sistemasap;
-use app\models\Ambientes;
-use app\models\Portales;
 use app\models\search\FormatosolicitudesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -74,24 +72,18 @@ class FormatosolicitudesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Formatosolicitudes();
-        //$modelSap = new Sistemasap();
+     public function actionCreate()
+   {
+       $model = new Formatosolicitudes();
 
-        if ($model->load(Yii::$app->request->post()) /*&&*/
-            /*$modelSap->load(Yii::$app->request->post())*/) {
-                if($model->save()){
-                   
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-        }
+       if ($model->load(Yii::$app->request->post()) && $model->save()) {
+           return $this->redirect(['view', 'id' => $model->id]);
+       }
 
-        return $this->render('create', [
-            'model' => $model,
-            //'modelSap' => $modelSap,
-        ]);
-    }
+       return $this->render('create', [
+           'model' => $model,
+       ]);
+   }
 
     /**
      * Updates an existing Formatosolicitudes model.
@@ -100,19 +92,15 @@ class FormatosolicitudesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
-                if($model->save()){
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-        }
+     public function actionUpdate($id)
+     {
+         $model = $this->findModel($id);
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             return $this->redirect(['view', 'id' => $model->id]);
+         }
+           return $this->render('update', ['model' => $model,]);
+     }
 
     /**
      * Deletes an existing Formatosolicitudes model.
@@ -130,7 +118,7 @@ class FormatosolicitudesController extends Controller
 
     public function actionObtenerempleado($parametros){
         $consulta = Formatosolicitudes :: getEmpleado($parametros);
-        
+
         return $consulta;
     }
 
@@ -142,17 +130,17 @@ class FormatosolicitudesController extends Controller
        $Ambientes = Ambientes::find()
                     ->where(['entornos_id' =>$id])
                     ->all();
-                    
+
                     if($countAmbientes>0)
                     {
                         echo "<div id='contenedor_$id'>";
                         foreach ($Ambientes as $Ambiente) {
                             # code...
                             /**echo "<option value='".$Ambiente->id."'>".$Ambiente->ambiente."</option>";*/
-                            echo "<label class='checkbox-inline' id='subcontenedor_$id'><input type='checkbox' id='".$Ambiente->id."' value='".$Ambiente->id."'>".$Ambiente->ambiente."     </label>"; 
+                            echo "<label class='checkbox-inline' id='subcontenedor_$id'><input type='checkbox' id='".$Ambiente->id."' value='".$Ambiente->id."'>".$Ambiente->ambiente."     </label>";
 
-                          //  echo "<input type='checkbox' id='".$Ambiente->id."' value='".$Ambiente->id."'>".$Ambiente->ambiente."    "; 
-                           
+                          //  echo "<input type='checkbox' id='".$Ambiente->id."' value='".$Ambiente->id."'>".$Ambiente->ambiente."    ";
+
                             // $array =  array();
 
                         }
@@ -171,8 +159,8 @@ class FormatosolicitudesController extends Controller
        $Portales = Portales ::find()
                     ->where(['ambientes_id' =>$id])
                     ->all();
-  
-                    
+
+
                     if($countPortales>0)
                     {
                         echo "<div id='contenedorAmb_$id'>";
@@ -180,7 +168,7 @@ class FormatosolicitudesController extends Controller
                             # code...
                             /**echo "<option value='".$Ambiente->id."'>".$Ambiente->ambiente."</option>";*/
                            //echo $Portal->portal_nombre;
-                             echo "<label class='checkbox-inline' id='subcontenedorAmb_$id'><input type='checkbox' id='".$Portal->id."' value='".$Portal->id."'>".$Portal->portal_nombre."  </label>   "; 
+                             echo "<label class='checkbox-inline' id='subcontenedorAmb_$id'><input type='checkbox' id='".$Portal->id."' value='".$Portal->id."'>".$Portal->portal_nombre."  </label>   ";
                         }
                         echo "</div>";
                     }else {

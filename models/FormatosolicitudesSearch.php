@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\search;
 
 use Yii;
 use yii\base\Model;
@@ -18,8 +18,8 @@ class FormatosolicitudesSearch extends Formatosolicitudes
     public function rules()
     {
         return [
-            [['id', 'users_id'], 'integer'],
-            [['autorizador_id', 'autorizador_nombre', 'autorizador_puesto', 'solicitante_id', 'solicitante_nombre', 'solicitante_puesto', 'usuario_id', 'nombre', 'puesto', 'departamento', 'correo', 'comentario'], 'safe'],
+            [['id'], 'integer'],
+            [['autorizador_id', 'autorizador_nombre', 'autorizador_puesto', 'solicitante_id', 'solicitante_nombre', 'solicitante_puesto', 'usuario_id', 'nombre', 'puesto', 'departamento', 'correo', 'comentario', 'tipo', 'usuarioRef', 'fecha_solicitud'], 'safe'],
         ];
     }
 
@@ -60,7 +60,6 @@ class FormatosolicitudesSearch extends Formatosolicitudes
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'users_id' => $this->users_id,
         ]);
 
         $query->andFilterWhere(['like', 'autorizador_id', $this->autorizador_id])
@@ -74,7 +73,10 @@ class FormatosolicitudesSearch extends Formatosolicitudes
             ->andFilterWhere(['like', 'puesto', $this->puesto])
             ->andFilterWhere(['like', 'departamento', $this->departamento])
             ->andFilterWhere(['like', 'correo', $this->correo])
-            ->andFilterWhere(['like', 'comentario', $this->comentario]);
+            ->andFilterWhere(['like', 'comentario', $this->comentario])
+            ->andFilterWhere(['like', 'tipo', $this->tipo])
+            ->andFilterWhere(['like', 'usuarioRef', $this->usuarioRef])
+            ->andFilterWhere(['like', 'fecha_solicitud', $this->fecha_solicitud]);
 
         return $dataProvider;
     }

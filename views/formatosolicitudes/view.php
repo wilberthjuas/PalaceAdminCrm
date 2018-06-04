@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Formatosolicitudes */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Formatosolicitudes', 'url' => ['index']];
+$this->title = "Solicitud de Creación Usuario";
+$this->params['breadcrumbs'][] = ['label' => 'Solicitudes Pendientes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="formatosolicitudes-view">
@@ -25,24 +25,32 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php
+    $var="";
+      if ('status'==0){
+        $var= 'No Revisado';
+      }
+      ?>
+
+
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'autorizador_id',
-            'autorizador_nombre',
-            'autorizador_puesto',
-            'solicitante_id',
-            'solicitante_nombre',
-            'solicitante_puesto',
-            'usuario_id',
-            'nombre',
-            'puesto',
-            'departamento',
-            'correo',
-            'comentario',
-            'users_id',
-        ],
-    ]) ?>
+       'model' => $model,
+       'attributes' => [
+           'usuario_id',
+           'nombre',
+           'puesto',
+           'departamento',
+           'correo',
+           'comentario',
+           'usuarioRef',
+           'fecha_solicitud',
+           'hora_solcitud',  // description attribute in HTML
+       [                      // the owner name of the model
+           'label' => 'Status',
+           'value' => $var,
+       ],
+       ],
+    ]
+  ) ?>
 
 </div>

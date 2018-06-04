@@ -1,21 +1,20 @@
 <?php
 
 use yii\helpers\Html;
+use app\models\Roles;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Formatosolicitudes */
-
-$this->title = 'Update Formatosolicitudes: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Formatosolicitudes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="formatosolicitudes-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php
 
+      echo $this->render('_formEditar', ['model' => $model,]);
+
+
+
+?>
 </div>

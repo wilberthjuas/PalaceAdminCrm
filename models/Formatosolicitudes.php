@@ -23,6 +23,9 @@ use \SoapClient;
  * @property string $comentario
  * @property string $tipo
  * @property string $usuarioRef
+ * @property string $fecha_solicitud
+ * @property string $hora_solcitud
+ * @property int $status
  * @property Users $users
  * @property Rolusuarios[] $rolusuarios
  * @property Sistemasap[] $sistemasaps
@@ -40,17 +43,16 @@ class Formatosolicitudes extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            [['autorizador_id', 'autorizador_nombre', 'autorizador_puesto', 'solicitante_id', 'solicitante_nombre', 'solicitante_puesto', 'usuario_id', 'nombre', 'puesto', 'departamento', 'comentario'], 'required'],
-            [['users_id'], 'integer'],
-            [['autorizador_id', 'autorizador_nombre', 'solicitante_id', 'solicitante_nombre', 'usuario_id', 'nombre'], 'string', 'max' => 100],
-            [['autorizador_puesto', 'solicitante_puesto', 'puesto', 'departamento', 'correo'], 'string', 'max' => 50],
-            [['comentario'], 'string', 'max' => 255],
-            [['users_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['users_id' => 'id']],
-        ];
-    }
+     public function rules()
+   {
+       return [
+           [['autorizador_id', 'autorizador_nombre', 'autorizador_puesto', 'solicitante_id', 'solicitante_nombre', 'solicitante_puesto', 'usuario_id', 'nombre', 'puesto', 'departamento', 'comentario'], 'required'],
+           [['autorizador_id', 'autorizador_nombre', 'solicitante_id', 'solicitante_nombre', 'usuario_id', 'nombre'], 'string', 'max' => 100],
+           [['autorizador_puesto', 'solicitante_puesto', 'puesto', 'departamento', 'correo', 'tipo', 'usuarioRef', 'fecha_solicitud','hora_solcitud'], 'string', 'max' => 50],
+           [['comentario'], 'string', 'max' => 255],
+           [['status'], 'integer'],
+       ];
+   }
 
     /**
      * @inheritdoc
@@ -65,14 +67,17 @@ class Formatosolicitudes extends \yii\db\ActiveRecord
             'solicitante_id' => 'Solicitante ID',
             'solicitante_nombre' => 'Solicitante Nombre',
             'solicitante_puesto' => 'Solicitante Puesto',
-            'usuario_id' => 'Usuario ID',
+            'usuario_id' => 'No. de Colaborador',
             'nombre' => 'Nombre',
             'puesto' => 'Puesto',
             'departamento' => 'Departamento',
             'correo' => 'Correo',
             'comentario' => 'Comentario',
             'tipo' => 'Tipo',
-            'usuarioRef' => 'Usuario Ref',
+            'usuarioRef' => 'Usuario Referencia',
+            'fecha_solicitud' => 'Fecha de Solicitud',
+            'hora_solcitud' => 'Hora Solicitud',
+            'status'=>'Status',
         ];
     }
 
@@ -110,27 +115,4 @@ class Formatosolicitudes extends \yii\db\ActiveRecord
     }
 
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsers()
-    {
-        return $this->hasOne(Users::className(), ['id' => 'users_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRolusuarios()
-    {
-        return $this->hasMany(Rolusuarios::className(), ['solicitudAlta_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSistemasaps()
-    {
-        return $this->hasMany(Sistemasap::className(), ['solicitudAlta_id' => 'id']);
-    }
 }
